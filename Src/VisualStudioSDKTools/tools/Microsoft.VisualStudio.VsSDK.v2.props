@@ -2,7 +2,8 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
-    <VsSDKAssemblyFile>$(VSToolsPath)\VSSDK\Microsoft.VsSDK.Build.Tasks.dll</VsSDKAssemblyFile>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\</VSToolsPath>
+    <VsSDKAssemblyFile>$(VSToolsPath)VSSDK\Microsoft.VsSDK.Build.Tasks.dll</VsSDKAssemblyFile>
   </PropertyGroup>
 
   <UsingTask TaskName="FindVsSDKInstallation" AssemblyFile="$(VsSDKAssemblyFile)" />
