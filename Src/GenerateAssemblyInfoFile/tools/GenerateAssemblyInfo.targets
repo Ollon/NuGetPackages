@@ -36,7 +36,7 @@
     <AssemblyAttribute Include="System.Reflection.AssemblyDefaultAliasAttribute" Condition="'$(DefaultAlias)' != '' and '$(GenerateAssemblyDefaultAliasAttribute)' == 'true'">
       <_Parameter1>$(DefaultAlias)</_Parameter1>
     </AssemblyAttribute>
-    <AssemblyAttribute Include="System.Reflection.AssemblyCultureAttribute" Condition="'$(Culture)' != '' and '$(GenerateAssemblyCultureAttribute)' == 'true'">
+    <AssemblyAttribute Include="System.Reflection.AssemblyCultureAttribute" Condition="'$(Culture)' != '' and '$(GenerateAssemblyCultureAttribute)' == 'true' and '$(OutputType)' == 'Library'">
       <_Parameter1>$(Culture)</_Parameter1>
     </AssemblyAttribute>
     <AssemblyAttribute Include="System.Reflection.AssemblyKeyFileAttribute" Condition="'$(KeyFile)' != '' and '$(GenerateAssemblyKeyFileAttribute)' == 'true'">
