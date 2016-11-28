@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\Build\Targets\NuGetPackages.Settings.props" Condition="Exists('..\..\Build\Targets\NuGetPackages.Settings.props')" />
+  <PropertyGroup>
+    <ProjectGuid>{CF1AEED1-72D4-43EC-95A8-505EFB41325B}</ProjectGuid>
+    <ProjectTypeGuids>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <AssemblyName>VisualStudioSDKTools</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>VisualStudioSDKTools</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="build\VisualStudioSDKTools.props" />
+    <None Include="build\VisualStudioSDKTools.targets" />
+    <None Include="NuGetPack.config" />
+    <None Include="internalPackages.config" />
+    <None Include="NuGetPack.Readme.txt" />
+    <None Include="project.json" />
+    <None Include="tools\Microsoft.VisualStudio.VsSDK.v2.props" />
+    <None Include="tools\Microsoft.VisualStudio.VsSDK.v2.targets" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <Import Project="..\..\Build\Targets\NuGetPackages.Imports.targets" Condition="Exists('..\..\Build\Targets\NuGetPackages.Imports.targets')" />
+</Project>

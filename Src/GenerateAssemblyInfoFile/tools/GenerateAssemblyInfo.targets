@@ -1,0 +1,87 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  
+  
+ 
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Reflection.AssemblyTitleAttribute" Condition="'$(Title)' != '' and '$(GenerateAssemblyTitleAttribute)' == 'true'">
+      <_Parameter1>$(Title)</_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Reflection.AssemblyConfigurationAttribute" Condition="'$(Configuration)' != '' and '$(GenerateAssemblyConfigurationAttribute)' == 'true'">
+      <_Parameter1>$(Configuration)</_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Reflection.AssemblyProductAttribute" Condition="'$(Product)' != '' and '$(GenerateAssemblyProductAttribute)' == 'true'">
+      <_Parameter1>$(Product)</_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Reflection.AssemblyDescriptionAttribute" Condition="'$(Description)' != '' and '$(GenerateAssemblyDescriptionAttribute)' == 'true'">
+      <_Parameter1>$(Description)</_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Reflection.AssemblyCompanyAttribute" Condition="'$(Company)' != '' and '$(GenerateAssemblyCompanyAttribute)' == 'true'">
+      <_Parameter1>$(Company)</_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Reflection.AssemblyVersionAttribute" Condition="'$(Version)' != '' and '$(GenerateAssemblyVersionAttribute)' == 'true'">
+      <_Parameter1>$(Version)</_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Reflection.AssemblyFileVersionAttribute" Condition="'$(FileVersion)' != '' and '$(GenerateAssemblyFileVersionAttribute)' == 'true'">
+      <_Parameter1>$(FileVersion)</_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Reflection.AssemblyInformationalVersionAttribute" Condition="'$(InformationalVersion)' != '' and '$(GenerateAssemblyInformationalVersionAttribute)' == 'true'">
+      <_Parameter1>$(InformationalVersion)</_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Reflection.AssemblyTrademarkAttribute" Condition="'$(Trademark)' != '' and '$(GenerateAssemblyTrademarkAttribute)' == 'true'">
+      <_Parameter1>$(Trademark)</_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Reflection.AssemblyCopyrightAttribute" Condition="'$(Copyright)' != '' and '$(GenerateAssemblyCopyrightAttribute)' == 'true'">
+      <_Parameter1>$(Copyright)</_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Reflection.AssemblyDefaultAliasAttribute" Condition="'$(DefaultAlias)' != '' and '$(GenerateAssemblyDefaultAliasAttribute)' == 'true'">
+      <_Parameter1>$(DefaultAlias)</_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Reflection.AssemblyCultureAttribute" Condition="'$(Culture)' != '' and '$(GenerateAssemblyCultureAttribute)' == 'true'">
+      <_Parameter1>$(Culture)</_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Reflection.AssemblyKeyFileAttribute" Condition="'$(KeyFile)' != '' and '$(GenerateAssemblyKeyFileAttribute)' == 'true'">
+      <_Parameter1>$(KeyFile)</_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Reflection.AssemblyDelaySignAttribute" Condition="'$(DelaySign)' != '' and '$(GenerateAssemblyDelaySignAttribute)' == 'true'">
+      <_Parameter1>$(DelaySign)</_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Reflection.AssemblyAlgorithmIdAttribute" Condition="'$(AlgorithmId)' != '' and '$(GenerateAssemblyAlgorithmIdAttribute)' == 'true'">
+      <_Parameter1>$(AlgorithmId)</_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Reflection.AssemblyFlagsAttribute" Condition="'$(Flags)' != '' and '$(GenerateAssemblyFlagsAttribute)' == 'true'">
+      <_Parameter1>$(Flags)</_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute" Condition="'$(Metadata)' != '' and '$(GenerateAssemblyMetadataAttribute)' == 'true'">
+      <_Parameter1>$(Metadata)</_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Reflection.AssemblySignatureKeyAttribute" Condition="'$(SignatureKey)' != '' and '$(GenerateAssemblySignatureKeyAttribute)' == 'true'">
+      <_Parameter1>$(SignatureKey)</_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Reflection.AssemblyKeyNameAttribute" Condition="'$(KeyName)' != '' and '$(GenerateAssemblyKeyNameAttribute)' == 'true'">
+      <_Parameter1>$(KeyName)</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+  <PropertyGroup>
+    <Language>C#</Language>
+    <GeneratedAssemblyInfoFile>$(IntermediateOutputPath)GeneratedAssemblyInfo_$(Version).cs</GeneratedAssemblyInfoFile>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <CoreCompileDependsOn>GenerateAssemblyInfoFile;$(CoreCompileDependsOn)</CoreCompileDependsOn>
+  </PropertyGroup>
+
+
+  <Target Name="GenerateAssemblyInfoFile"
+          Condition="'$(Language)'=='VB' or '$(Language)'=='C#'"
+          Inputs="$(MSBuildThisFileFullPath)"
+          Outputs="$(GeneratedAssemblyInfoFile)"
+          AfterTargets="PrepareForBuild">
+
+    <WriteCodeFragment AssemblyAttributes="@(AssemblyAttribute)" Language="$(Language)" OutputFile="$(GeneratedAssemblyInfoFile)">
+      <Output TaskParameter="OutputFile" ItemName="Compile" />
+      <Output TaskParameter="OutputFile" ItemName="FileWrites" />
+    </WriteCodeFragment>
+  </Target>
+  
+</Project>

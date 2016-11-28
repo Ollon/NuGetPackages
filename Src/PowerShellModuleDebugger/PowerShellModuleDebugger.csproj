@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\Build\Targets\NuGetPackages.Settings.props" Condition="Exists('..\..\Build\Targets\NuGetPackages.Settings.props')" />
+  <PropertyGroup>
+    <ProjectGuid>{B82FBD2D-9770-410C-979A-086CA532AB47}</ProjectGuid>
+    <ProjectTypeGuids>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <AssemblyName>PowerShellModuleDebugger</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>PowerShellModuleDebugger</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="build\PowerShellModuleDebugger.props" />
+    <None Include="build\PowerShellModuleDebugger.targets" />
+    <None Include="NuGetPack.config" />
+    <None Include="internalPackages.config" />
+    <None Include="NuGetPack.Readme.txt" />
+    <None Include="project.json" />
+    <None Include="tools\PowerShell.Dbg.props" />
+    <None Include="tools\PowerShell.Dbg.targets" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <Import Project="..\..\Build\Targets\NuGetPackages.Imports.targets" Condition="Exists('..\..\Build\Targets\NuGetPackages.Imports.targets')" />
+</Project>

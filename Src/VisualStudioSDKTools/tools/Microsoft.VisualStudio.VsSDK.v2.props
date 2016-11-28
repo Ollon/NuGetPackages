@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <VsSDKAssemblyFile>$(VSToolsPath)\VSSDK\Microsoft.VsSDK.Build.Tasks.dll</VsSDKAssemblyFile>
+  </PropertyGroup>
+
+  <UsingTask TaskName="FindVsSDKInstallation" AssemblyFile="$(VsSDKAssemblyFile)" />
+
+  <!--
+    Set the general properties for this installation of the SDK
+  -->
+  <PropertyGroup>
+    <VsSDKVersion>15.0</VsSDKVersion>
+    <VSSDKTargetPlatformVersion>15.0</VSSDKTargetPlatformVersion>
+    <VSSDKTargetsPath>$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VsSDKVersion)\VSSDK</VSSDKTargetsPath>
+    <VSSDKTargetPlatformRegRoot>Software\Microsoft\VisualStudio\$(VSSDKTargetPlatformVersion)</VSSDKTargetPlatformRegRoot>
+    <VSSDKTargetPlatformRegRootSuffix Condition="'$(VSSDKTargetPlatformRegRootSuffix)' == ''">Exp</VSSDKTargetPlatformRegRootSuffix>
+  </PropertyGroup>
+  
+  <Target Name="FindSDKInstallation" Condition="'$(VsSDKInstall)'==''">
+    <FindVsSDKInstallation>
+      <Output TaskParameter="InstallationPath" PropertyName="VsSDKInstall" />
+      <Output TaskParameter="IncludesPath" PropertyName="VsSDKIncludes" />
+      <Output TaskParameter="ToolsPath" PropertyName="VsSDKToolsPath" />
+    </FindVsSDKInstallation>
+  </Target>
+
+</Project>

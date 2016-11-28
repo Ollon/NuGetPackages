@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  
+  <!--
+  
+        <IncludeStandardReferences>false</IncludeStandardReferences>
+        <IncludePowerShellReferences>false</IncludePowerShellReferences>
+        <IncludeManagementReferences>false</IncludeManagementReferences>
+        <IncludeProjectTemplateReferences>false</IncludeProjectTemplateReferences>
+        <IncludeWpfReferences>false</IncludeWpfReferences>
+        <IncludeDiagnosticsReferences>false</IncludeDiagnosticsReferences>
+        <IncludeCompositionReferences>false</IncludeCompositionReferences>
+        <IncludeMSBuildReferences>false</IncludeMSBuildReferences>
+        <IncludeCodeAnalysisReferences>false</IncludeCodeAnalysisReferences>
+        <IncludeVisualStudioPackageReferences>false</IncludeVisualStudioPackageReferences>
+        <IncludeJsonReferences>false</IncludeJsonReferences>
+        <IncludeVisualStudioShellReferences>false</IncludeVisualStudioShellReferences>
+  -->
+  
+  <Choose>
+    <When Condition="'$(InternalProjectType)' == 'Library'">
+      <PropertyGroup>
+        <IncludeStandardReferences>true</IncludeStandardReferences>
+        <IncludeWpfReferences>true</IncludeWpfReferences>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(InternalProjectType)' == 'PortableLibrary'">
+      <PropertyGroup>
+        <IncludeDiagnosticsReferences>true</IncludeDiagnosticsReferences>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(InternalProjectType)' == 'Console'">
+      <PropertyGroup>
+        <IncludeStandardReferences>true</IncludeStandardReferences>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(InternalProjectType)' == 'BuildDebugger'">
+      <PropertyGroup>
+        <IncludeStandardReferences>true</IncludeStandardReferences>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(InternalProjectType)' == 'PowerShell'">
+      <PropertyGroup>
+        <IncludeStandardReferences>true</IncludeStandardReferences>
+        <IncludePowerShellReferences>true</IncludePowerShellReferences>
+        <IncludeManagementReferences>true</IncludeManagementReferences>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(InternalProjectType)' == 'ProjectTemplates'">
+      <PropertyGroup>
+        <IncludeProjectTemplateReferences>true</IncludeProjectTemplateReferences>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(InternalProjectType)' == 'CodeAnalysis'">
+      <PropertyGroup>
+        <IncludeCodeAnalysisReferences>true</IncludeCodeAnalysisReferences>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(InternalProjectType)' == 'VSPackage'">
+      <PropertyGroup>
+        <IncludeStandardReferences>true</IncludeStandardReferences>
+        <IncludeWpfReferences>true</IncludeWpfReferences>
+        <IncludeVisualStudioPackageReferences>true</IncludeVisualStudioPackageReferences>
+      </PropertyGroup>
+    </When>
+
+  </Choose>
+
+  <Choose>
+    <When Condition="'$(IncludeStandardReferences)' == 'true'">
+      <ItemGroup>
+        <Reference Include="System" />
+        <Reference Include="System.Xml" />
+        <Reference Include="System.Linq">
+          <Name>System.Linq</Name>
+          <HintPath>$(SystemDrive)\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Linq\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Linq.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Data" />
+        <Reference Include="System.Xml.Linq" />
+        <Reference Include="Microsoft.CSharp" />
+        <Reference Include="System.Data.DataSetExtensions" />
+        <Reference Include="System.ComponentModel.Composition" />
+      </ItemGroup>
+    </When>
+  </Choose>
+
+  <Choose>
+    <When Condition="'$(IncludeWpfReferences)' == 'true'">
+      <ItemGroup>
+        <Reference Include="System.Xaml" />
+        <Reference Include="WindowsBase" />
+        <Reference Include="PresentationCore" />
+        <Reference Include="PresentationFramework" />
+        <Reference Include="System.Windows.Forms" />
+        <Reference Include="System.Design" />
+        <Reference Include="System.Drawing" />
+      </ItemGroup>
+    </When>
+  </Choose>
+
+
+  <Choose>
+    <When Condition="'$(IncludeMSBuildReferences)' == 'true'">
+      <ItemGroup>
+        <Reference Include="Microsoft.Build" />
+        <Reference Include="Microsoft.Build.Framework" />
+        <Reference Include="Microsoft.Build.Utilities.Core" />
+      </ItemGroup>
+    </When>
+  </Choose>
+
+  <Choose>
+    <When Condition="'$(IncludeManagementReferences)' == 'true'">
+      <ItemGroup>
+        <Reference Include="System.Management" />
+        <Reference Include="System.Management.Instrumentation" />
+      </ItemGroup>
+    </When>
+  </Choose>
+
+  <Choose>
+    <When Condition="'$(IncludeProjectTemplateReferences)'=='true'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.CoreUtility">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="System" />
+        <Reference Include="System.Core" />
+        <Reference Include="System.Data" />
+        <Reference Include="System.Xml" />
+      </ItemGroup>
+    </When>
+  </Choose>
+
+
+  <Choose>
+    <When Condition="'$(IncludeVisualStudioShellReferences)' == 'true'">
+      <ItemGroup>
+        <ProjectReference Include="..\Dependencies\VisualStudioShell\VisualStudioShell.csproj">
+          <Project>{D5728D93-3AE4-4CB9-9B12-1418F653FDF9}</Project>
+          <Name>VisualStudioShell</Name>
+        </ProjectReference>
+      </ItemGroup>
+    </When>
+  </Choose>
+
+
+  <Choose>
+    <When Condition="'$(IncludeVisualStudioReferences)' == 'true'">
+      <ItemGroup>
+        <ProjectReference Include="..\Dependencies\VisualStudio\VisualStudio.csproj">
+          <Project>{FA5A6238-FCBC-407D-A48C-528220D2504A}</Project>
+          <Name>VisualStudio</Name>
+        </ProjectReference>
+      </ItemGroup>
+    </When>
+  </Choose>
+
+
+  <Choose>
+    <When Condition="'$(IncludeVisualStudioPackageReferences)'=='true'">
+      <ItemGroup>
+        <ProjectReference Include="..\Dependencies\ComponentModelHost\ComponentModelHost.csproj">
+          <Project></Project>
+          <Name>ComponentModelHost</Name>
+        </ProjectReference>
+        <Reference Include="Microsoft.VisualStudio.CommandBars, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+          <EmbedInteropTypes>False</EmbedInteropTypes>
+        </Reference>
+        <ProjectReference Include="..\Dependencies\DTE\DTE.csproj">
+          <Project>{8901A5C8-98B1-45B3-94C3-011711FE0F0C}</Project>
+          <Name>DTE</Name>
+        </ProjectReference>
+        <ProjectReference Include="..\Dependencies\VisualStudio\VisualStudio.csproj">
+          <Project>{FA5A6238-FCBC-407D-A48C-528220D2504A}</Project>
+          <Name>VisualStudio</Name>
+        </ProjectReference>
+      </ItemGroup>
+    </When>
+  </Choose>
+
+  <Choose>
+    <When Condition="'$(IncludeDiagnosticsReferences)' == 'true'">
+      <ItemGroup>
+        <ProjectReference Include="..\Dependencies\Diagnostics\Diagnostics.csproj">
+          <Project>{880DB5EC-8BF3-485B-93DB-015B9903CA87}</Project>
+          <Name>Diagnostics</Name>
+        </ProjectReference>
+      </ItemGroup>
+    </When>
+  </Choose>
+
+  <Choose>
+    <When Condition="'$(IncludePowerShellReferences)' == 'true'">
+      <ItemGroup>
+        <ProjectReference Include="..\Dependencies\PowerShell\PowerShell.csproj">
+          <Project>{1097BEDB-0470-40E0-AC35-A8EE917A1D46}</Project>
+          <Name>PowerShell</Name>
+        </ProjectReference>
+      </ItemGroup>
+    </When>
+  </Choose>
+
+  <Choose>
+    <When Condition="'$(IncludeJsonReferences)' == 'true'">
+      <ItemGroup>
+        <ProjectReference Include="..\Dependencies\Json\Json.csproj">
+          <Project>{E6293F51-0EE7-4059-BCA6-0A4166C50DD5}</Project>
+          <Name>Json</Name>
+        </ProjectReference>
+      </ItemGroup>
+    </When>
+  </Choose>
+
+  <Choose>
+    <When Condition="'$(IncludeDTEReferences)' == 'true'">
+      <ItemGroup>
+        <ProjectReference Include="..\Dependencies\DTE\DTE.csproj">
+          <Project>{8901A5C8-98B1-45B3-94C3-011711FE0F0C}</Project>
+          <Name>DTE</Name>
+        </ProjectReference>
+      </ItemGroup>
+    </When>
+  </Choose>
+
+  <Choose>
+    <When Condition="'$(IncludeNuGetReferences)' == 'true'">
+      <ItemGroup>
+        <ProjectReference Include="..\Dependencies\NuGet\NuGet.csproj">
+          <Project>{1C64D25B-2E34-4B50-B56D-FD0E4D8F7285}</Project>
+          <Name>NuGet</Name>
+        </ProjectReference>
+      </ItemGroup>
+    </When>
+  </Choose>
+
+  <Choose>
+    <When Condition="'$(IncludeRoslynReferences)' == 'true'">
+      <ItemGroup>
+        <ProjectReference Include="..\Dependencies\Roslyn\Roslyn.csproj">
+          <Project>{6461EEB5-237D-4E8B-B879-9A71608A24BA}</Project>
+          <Name>Roslyn</Name>
+        </ProjectReference>
+      </ItemGroup>
+    </When>
+  </Choose>
+
+  <Choose>
+    <When Condition="'$(IncludeCodeAnalysisReferences)' == 'true'">
+      <ItemGroup>
+        <ProjectReference Include="..\Dependencies\CodeAnalysis\CodeAnalysis.csproj">
+          <Project>{D1A0D7D3-C5F1-4F71-A363-BE82EDE9E0A7}</Project>
+          <Name>CodeAnalysis</Name>
+        </ProjectReference>
+        <ProjectReference Include="..\Dependencies\Composition\Composition.csproj">
+          <Project>{8C691519-A588-4EA1-B47F-FE08793F7475}</Project>
+          <Name>Composition</Name>
+        </ProjectReference>
+        <ProjectReference Include="..\Dependencies\Immutable\Immutable.csproj">
+          <Project>{36063AAE-CE26-4F17-9059-453ABF79993B}</Project>
+          <Name>Immutable</Name>
+        </ProjectReference>
+        <ProjectReference Include="..\Dependencies\Metadata\Metadata.csproj">
+          <Project>{AF60C3B2-2CC6-470B-A008-6CAFDCF2C402}</Project>
+          <Name>Metadata</Name>
+        </ProjectReference>
+      </ItemGroup>
+    </When>
+  </Choose>
+
+
+  <Choose>
+    <When Condition="'$(IncludeVisualStudioShellReferences)' == 'true'">
+      <ItemGroup>
+        <ProjectReference Include="..\Dependencies\VisualStudioShell\VisualStudioShell.csproj">
+          <Project>{D5728D93-3AE4-4CB9-9B12-1418F653FDF9}</Project>
+          <Name>VisualStudioShell</Name>
+        </ProjectReference>
+      </ItemGroup>
+    </When>
+  </Choose>
+
+
+  <Choose>
+    <When Condition="'$(IncludeVisualStudioReferences)' == 'true'">
+      <ItemGroup>
+        <ProjectReference Include="..\Dependencies\VisualStudio\VisualStudio.csproj">
+          <Project>{FA5A6238-FCBC-407D-A48C-528220D2504A}</Project>
+          <Name>VisualStudio</Name>
+        </ProjectReference>
+      </ItemGroup>
+    </When>
+  </Choose>
+
+
+  <Choose>
+    <When Condition="'$(IncludeVisualStudioPackageReferences)'=='true'">
+      <ItemGroup>
+        <ProjectReference Include="..\Dependencies\DTE\DTE.csproj">
+          <Project>{8901A5C8-98B1-45B3-94C3-011711FE0F0C}</Project>
+          <Name>DTE</Name>
+        </ProjectReference>
+        <ProjectReference Include="..\Dependencies\VisualStudio\VisualStudio.csproj">
+          <Project>{FA5A6238-FCBC-407D-A48C-528220D2504A}</Project>
+          <Name>VisualStudio</Name>
+        </ProjectReference>
+      </ItemGroup>
+    </When>
+  </Choose>
+
+  <Choose>
+    <When Condition="'$(IncludeDiagnosticsReferences)' == 'true'">
+      <ItemGroup>
+        <ProjectReference Include="..\Dependencies\Diagnostics\Diagnostics.csproj">
+          <Project>{880DB5EC-8BF3-485B-93DB-015B9903CA87}</Project>
+          <Name>Diagnostics</Name>
+        </ProjectReference>
+      </ItemGroup>
+    </When>
+  </Choose>
+
+  <Choose>
+    <When Condition="'$(IncludePowerShellReferences)' == 'true'">
+      <ItemGroup>
+        <ProjectReference Include="..\Dependencies\PowerShell\PowerShell.csproj">
+          <Project>{1097BEDB-0470-40E0-AC35-A8EE917A1D46}</Project>
+          <Name>PowerShell</Name>
+        </ProjectReference>
+      </ItemGroup>
+    </When>
+  </Choose>
+
+  <Choose>
+    <When Condition="'$(IncludeJsonReferences)' == 'true'">
+      <ItemGroup>
+        <ProjectReference Include="..\Dependencies\Json\Json.csproj">
+          <Project>{E6293F51-0EE7-4059-BCA6-0A4166C50DD5}</Project>
+          <Name>Json</Name>
+        </ProjectReference>
+      </ItemGroup>
+    </When>
+  </Choose>
+
+  <Choose>
+    <When Condition="'$(IncludeDTEReferences)' == 'true'">
+      <ItemGroup>
+        <ProjectReference Include="..\Dependencies\DTE\DTE.csproj">
+          <Project>{8901A5C8-98B1-45B3-94C3-011711FE0F0C}</Project>
+          <Name>DTE</Name>
+        </ProjectReference>
+      </ItemGroup>
+    </When>
+  </Choose>
+
+  <Choose>
+    <When Condition="'$(IncludeNuGetReferences)' == 'true'">
+      <ItemGroup>
+        <ProjectReference Include="..\Dependencies\NuGet\NuGet.csproj">
+          <Project>{1C64D25B-2E34-4B50-B56D-FD0E4D8F7285}</Project>
+          <Name>NuGet</Name>
+        </ProjectReference>
+      </ItemGroup>
+    </When>
+  </Choose>
+
+  <Choose>
+    <When Condition="'$(IncludeCodeAnalysisReferences)' == 'true'">
+      <ItemGroup>
+        <ProjectReference Include="..\Dependencies\CodeAnalysis\CodeAnalysis.csproj">
+          <Project>{D1A0D7D3-C5F1-4F71-A363-BE82EDE9E0A7}</Project>
+          <Name>CodeAnalysis</Name>
+        </ProjectReference>
+        <ProjectReference Include="..\Dependencies\Composition\Composition.csproj">
+          <Project>{8C691519-A588-4EA1-B47F-FE08793F7475}</Project>
+          <Name>Composition</Name>
+        </ProjectReference>
+        <ProjectReference Include="..\Dependencies\Immutable\Immutable.csproj">
+          <Project>{36063AAE-CE26-4F17-9059-453ABF79993B}</Project>
+          <Name>Immutable</Name>
+        </ProjectReference>
+        <ProjectReference Include="..\Dependencies\Metadata\Metadata.csproj">
+          <Project>{AF60C3B2-2CC6-470B-A008-6CAFDCF2C402}</Project>
+          <Name>Metadata</Name>
+        </ProjectReference>
+      </ItemGroup>
+    </When>
+  </Choose>
+
+</Project>

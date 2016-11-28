@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+
+  <PropertyGroup>
+    <Version Condition="'$(Version)' == ''">1.0.0.0</Version>
+    <InformationalVersion Condition="'$(InformationalVersion)' == ''">1.0.0-RC</InformationalVersion>
+    <FileVersion Condition="'$(FileVersion)' == ''">1.0.0.0</FileVersion>
+
+    <Company Condition="'$(Company)' == ''">Ollon, LLC</Company>
+    <Copyright Condition="'$(Copyright)' == ''">© 2017 $(Company). All rights reserved.</Copyright>
+
+    <Product Condition="'$(Product)' == ''">$(AssemblyName)</Product>
+
+    <Description Condition="'$(Description)' == ''">Package Description</Description>
+    <Title Condition="'$(Title)' == ''">$(AssemblyName)</Title>
+    <Configuration Condition="'$(Configuration)' == ''">Debug</Configuration>
+
+    <Culture Condition="'$(Culture)' == ''">en-US</Culture>
+
+    <!--
+    <Trademark Condition="'$(Trademark)' == ''"></Trademark>
+    <DefaultAlias Condition="'$(DefaultAlias)' == ''"></DefaultAlias>
+    <KeyFile Condition="'$(KeyFile)' == ''"></KeyFile>
+    <DelaySign Condition="'$(DelaySign)' == ''"></DelaySign>
+    <AlgorithmId Condition="'$(AlgorithmId)' == ''"></AlgorithmId>
+    <Flags Condition="'$(Flags)' == ''"></Flags>
+    <Metadata Condition="'$(Metadata)' == ''"></Metadata>
+    <SignatureKey Condition="'$(SignatureKey)' == ''"></SignatureKey>
+    <KeyName Condition="'$(KeyName)' == ''"></KeyName>-->
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <GenerateAssemblyCopyrightAttribute Condition="'$(GenerateAssemblyCopyrightAttribute)'==''">true</GenerateAssemblyCopyrightAttribute>
+    <GenerateAssemblyTrademarkAttribute Condition="'$(GenerateAssemblyTrademarkAttribute)'==''">true</GenerateAssemblyTrademarkAttribute>
+    <GenerateAssemblyProductAttribute Condition="'$(GenerateAssemblyProductAttribute)'==''">true</GenerateAssemblyProductAttribute>
+    <GenerateAssemblyCompanyAttribute Condition="'$(GenerateAssemblyCompanyAttribute)'==''">true</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyDescriptionAttribute Condition="'$(GenerateAssemblyDescriptionAttribute)'==''">true</GenerateAssemblyDescriptionAttribute>
+    <GenerateAssemblyTitleAttribute Condition="'$(GenerateAssemblyTitleAttribute)'==''">true</GenerateAssemblyTitleAttribute>
+    <GenerateAssemblyConfigurationAttribute Condition="'$(GenerateAssemblyConfigurationAttribute)'==''">true</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyInformationalVersionAttribute Condition="'$(GenerateAssemblyInformationalVersionAttribute)'==''">true</GenerateAssemblyInformationalVersionAttribute>
+    <GenerateAssemblyFileVersionAttribute Condition="'$(GenerateAssemblyFileVersionAttribute)'==''">true</GenerateAssemblyFileVersionAttribute>
+    <GenerateAssemblyCultureAttribute Condition="'$(GenerateAssemblyCultureAttribute)'==''">true</GenerateAssemblyCultureAttribute>
+    <GenerateAssemblyVersionAttribute Condition="'$(GenerateAssemblyVersionAttribute)'==''">true</GenerateAssemblyVersionAttribute>
+    <GenerateAssemblyKeyFileAttribute Condition="'$(GenerateAssemblyKeyFileAttribute)'==''">false</GenerateAssemblyKeyFileAttribute>
+    <GenerateAssemblyDelaySignAttribute Condition="'$(GenerateAssemblyDelaySignAttribute)'==''">false</GenerateAssemblyDelaySignAttribute>
+    <GenerateAssemblyAlgorithmIdAttribute Condition="'$(GenerateAssemblyAlgorithmIdAttribute)'==''">false</GenerateAssemblyAlgorithmIdAttribute>
+    <GenerateAssemblyFlagsAttribute Condition="'$(GenerateAssemblyFlagsAttribute)'==''">false</GenerateAssemblyFlagsAttribute>
+    <GenerateAssemblyMetadataAttribute Condition="'$(GenerateAssemblyMetadataAttribute)'==''">false</GenerateAssemblyMetadataAttribute>
+    <GenerateAssemblySignatureKeyAttribute Condition="'$(GenerateAssemblySignatureKeyAttribute)'==''">false</GenerateAssemblySignatureKeyAttribute>
+    <GenerateAssemblyKeyNameAttribute Condition="'$(GenerateAssemblyKeyNameAttribute)'==''">false</GenerateAssemblyKeyNameAttribute>
+    <GenerateAssemblyDefaultAliasAttribute Condition="'$(GenerateAssemblyDefaultAliasAttribute)'==''">false</GenerateAssemblyDefaultAliasAttribute>
+  </PropertyGroup>
+
+
+</Project>

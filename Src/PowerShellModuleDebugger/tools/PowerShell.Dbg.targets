@@ -1,0 +1,30 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <Target Name="AfterBuild">
+    <ItemGroup>
+      <Dependencies Include="$(OutputPath)*.dll" />
+      <Dependencies Include="$(OutputPath)*.ps1xml" />
+    </ItemGroup>
+    <ItemGroup>
+      <PowerShellModuleDataLine Include="@{" />
+      <PowerShellModuleDataLine Include="    RootModule = '$(AssemblyName).dll'" />
+      <PowerShellModuleDataLine Include="    ModuleVersion = '$(AssemblyVersion)'" />
+      <PowerShellModuleDataLine Include="    GUID = '$(ProjectGuid)'" />
+      <PowerShellModuleDataLine Include="    Author = 'Brad R. Marshall'" />
+      <PowerShellModuleDataLine Include="    CompanyName = 'Ollon, LLC'" />
+      <PowerShellModuleDataLine Include="    Copyright = '(c) 2016 Ollon, LLC. All Rights Reserved.'" />
+      <!--<PowerShellModuleDataLine Include="    FormatsToProcess = @('$(AssemblyName).Format.ps1xml')" Condition="'$(MSBuildProjectName)' == 'Ollon.PowerShell.WSUS'"/>-->
+      <PowerShellModuleDataLine Include="    CmdletsToExport = '%2A'" />
+      <PowerShellModuleDataLine Include="    AliasesToExport = '%2A'" />
+      <PowerShellModuleDataLine Include="}" />
+
+    </ItemGroup>
+    <RemoveDir Directories="$(ModuleFolder)" />
+    <MakeDir Directories="$(ModuleFolder)" />
+    <Copy SourceFiles="$(RootModule)" DestinationFolder="$(ModuleFolder)" />
+    <Copy SourceFiles="@(Dependencies)" DestinationFolder="$(ModuleFolder)" />
+    <WriteLinesToFile Lines="@(PowerShellModuleDataLine)" File="$(DataFile)" />
+  </Target>
+  
+  
+</Project>

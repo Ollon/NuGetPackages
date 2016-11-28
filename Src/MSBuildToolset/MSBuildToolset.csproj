@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\Build\Targets\NuGetPackages.Settings.props" Condition="Exists('..\..\Build\Targets\NuGetPackages.Settings.props')" />
+  <PropertyGroup>
+    <ProjectGuid>{589B9858-DFD5-4C23-AD51-14752BA01552}</ProjectGuid>
+    <ProjectTypeGuids>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <AssemblyName>MSBuildToolset</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>MSBuildToolset</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="build\MSBuildToolset.props" />
+    <None Include="build\MSBuildToolset.targets" />
+    <None Include="NuGetPack.config" />
+    <None Include="internalPackages.config" />
+    <None Include="NuGetPack.Readme.txt" />
+    <None Include="project.json" />
+    <None Include="tools\AIO\NETStandard.pp.proj" />
+    <None Include="tools\Microsoft.CodeAnalysis.targets" />
+    <None Include="tools\Microsoft.Common.CurrentVersion.targets" />
+    <None Include="tools\Microsoft.Common.props" />
+    <None Include="tools\Microsoft.Common.targets" />
+    <None Include="tools\Microsoft.CSharp.Core.targets" />
+    <None Include="tools\Microsoft.CSharp.CurrentVersion.targets" />
+    <None Include="tools\Microsoft.CSharp.DesignTime.targets" />
+    <None Include="tools\Microsoft.CSharp.targets" />
+    <None Include="tools\Microsoft.DotNet.Docker.ImportAfter.targets" />
+    <None Include="tools\Microsoft.DotNet.Docker.targets" />
+    <None Include="tools\Microsoft.Managed.DesignTime.targets" />
+    <None Include="tools\Microsoft.NET.DefaultOutputPaths.targets" />
+    <None Include="tools\Microsoft.NET.DisableStandardFrameworkResolution.targets" />
+    <None Include="tools\Microsoft.NET.GenerateAssemblyInfo.targets" />
+    <None Include="tools\Microsoft.NET.PreserveCompilationContext.targets" />
+    <None Include="tools\Microsoft.NET.Publish.targets" />
+    <None Include="tools\Microsoft.NET.RuntimeIdentifierInference.targets" />
+    <None Include="tools\Microsoft.NET.Sdk.BeforeCommon.targets" />
+    <None Include="tools\Microsoft.NET.Sdk.Common.targets" />
+    <None Include="tools\Microsoft.NET.Sdk.CSharp.props" />
+    <None Include="tools\Microsoft.NET.Sdk.CSharp.targets" />
+    <None Include="tools\Microsoft.NET.Sdk.props" />
+    <None Include="tools\Microsoft.NET.Sdk.targets" />
+    <None Include="tools\Microsoft.NET.TargetFrameworkInference.targets" />
+    <None Include="tools\Microsoft.NuGet.ImportAfter.targets" />
+    <None Include="tools\Microsoft.NuGet.ImportBefore.props" />
+    <None Include="tools\Microsoft.NuGet.props" />
+    <None Include="tools\Microsoft.NuGet.targets" />
+    <None Include="tools\Microsoft.PackageDependencyResolution.targets" />
+    <None Include="tools\Microsoft.QualityTools.Testing.Fakes.ImportAfter.targets" />
+    <None Include="tools\Microsoft.QualityTools.Testing.Fakes.targets" />
+    <None Include="tools\Microsoft.ServiceModel.targets" />
+    <None Include="tools\Microsoft.WorkflowBuildExtensions.targets" />
+    <None Include="tools\Microsoft.Xaml.targets" />
+    <None Include="tools\MSBuild.Imports.targets" />
+    <None Include="tools\MSBuild.References.props" />
+    <None Include="tools\MSBuild.Settings.props" />
+    <None Include="tools\NuGet.Build.Tasks.Pack.targets" />
+    <None Include="tools\NuGet.targets" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <Import Project="..\..\Build\Targets\NuGetPackages.Imports.targets" Condition="Exists('..\..\Build\Targets\NuGetPackages.Imports.targets')" />
+</Project>

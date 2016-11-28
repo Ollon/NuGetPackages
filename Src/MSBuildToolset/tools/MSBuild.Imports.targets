@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="15.0">
+
+  <Import Project="MSBuild.References.props" />
+
+  <Import Project="MSBuild.Versions.targets"/>
+  
+  <PropertyGroup>
+    <IsExtensibilityProject Condition="'$(IsExtensibilityProject)'==''">false</IsExtensibilityProject>
+  </PropertyGroup>
+  
+  
+  <PropertyGroup Condition="'$(ProjectLanguage)' == ''">
+    <ProjectLanguage Condition="'$(MSBuildProjectExtension)' == '.csproj' OR '$(Language)' == 'C#'">CSharp</ProjectLanguage>
+    <ProjectLanguage Condition="'$(MSBuildProjectExtension)' == '.vbproj' OR '$(Language)' == 'VB'">VB</ProjectLanguage>
+    <ProjectLanguage Condition="'$(MSBuildProjectExtension)' == '.vcxproj' OR '$(Language)' == 'C++'">C++</ProjectLanguage>
+  </PropertyGroup>
+
+  <Choose>
+    <When Condition="'$(ProjectLanguage)' == 'VB'">
+      <PropertyGroup>
+        <MSBuildTargetsLanguageName>VisualBasic</MSBuildTargetsLanguageName>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(ProjectLanguage)' == 'CSharp'">
+      <PropertyGroup>
+        <MSBuildTargetsLanguageName>CSharp</MSBuildTargetsLanguageName>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(ProjectLanguage)' == 'C++'">
+
+    </When>
+    <When Condition="'$(ProjectLanguage)' == ''">
+      <PropertyGroup>
+        <MSBuildTargetsLanguageName>CSharp</MSBuildTargetsLanguageName>
+      </PropertyGroup>
+    </When>
+  </Choose>
+
+  <Choose>
+    <When Condition="'$(ProjectLanguage)' == 'C++'">
+      <PropertyGroup>
+        <MSBuildTargetsFilePath>$(VCTargetsPath)\Microsoft.Cpp.targets</MSBuildTargetsFilePath>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(TargetFrameworkIdentifier)' == '.NETPortable'">
+      <PropertyGroup>
+        <MSBuildTargetsFilePath>$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.$(MSBuildTargetsLanguageName).targets</MSBuildTargetsFilePath>
+      </PropertyGroup>
+    </When>
+    <!--<When Condition="'$(TargetFrameworkIdentifier)' == '.NETPortable'">
+      <PropertyGroup>
+        <MSBuildTargetsFilePath>$(MSBuildThisFileDirectory)MSBuild.Portable.targets</MSBuildTargetsFilePath>
+      </PropertyGroup>
+    </When>-->
+    <Otherwise>
+      <PropertyGroup>
+        <MSBuildTargetsFilePath>$(MSBuildToolsPath)\Microsoft.$(MSBuildTargetsLanguageName).targets</MSBuildTargetsFilePath>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
+
+  
+  
+  <Import Project="$(MSBuildTargetsFilePath)" />
+
+  <PropertyGroup Condition="'$(InternalProjectType)'=='Dependency'">
+    <TargetPath></TargetPath>
+  </PropertyGroup>
+
+  <Target Name="RuntimeImplementationProjectOutputGroup"  Condition="'$(InternalProjectType)'=='Dependency'"/>
+
+  
+
+  <Import Condition="'$(InternalProjectType)'=='PowerShell'" Project="MSBuild.PowerShell.targets"/>
+
+  <Import Condition="'$(IsExtensibilityProject)'=='true'" Project="MSBuild.Extensibility.targets"/>
+
+  <Import Condition="'$(ImportProjectSystemTargets)'=='true'" Project="MSBuild.ProjectSystem.targets"/>
+
+</Project>

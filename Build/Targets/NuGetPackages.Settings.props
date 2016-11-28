@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+
+  <PropertyGroup>
+
+    <PublishPackages>false</PublishPackages>
+    
+    <PackageVersion>15.1.0</PackageVersion>
+    <NuGetVersion>$(PackageVersion)-RC</NuGetVersion>
+    
+    <Verbosity>detailed</Verbosity>
+    <FeedUrl>https://www.myget.org/F/ollon-build-tools/api/v2/package</FeedUrl>
+    <ApiKey>d3cb76e3-890c-4874-a882-267e518aee3d</ApiKey>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SolutionDir Condition="'$(SolutionDir)'=='' OR '$(SolutionDir)'=='*Undefined*'">$(MSBuildThisFileDirectory)..\..\Src\</SolutionDir>
+    <OutputPath>$(SolutionDir)..\Binaries\$(Configuration)\</OutputPath>
+    <OutputPath>$([System.IO.Path]::GetFullPath('$(OutputPath)'))</OutputPath>
+    <IntermediateOutputPath>$(SolutionDir)..\Binaries\Obj\$(MSBuildProjectName)\</IntermediateOutputPath>
+    <NuGetOutputPath>$(SolutionDir)..\Binaries\NuGet\</NuGetOutputPath>
+    <NuGetOutputPath>$([System.IO.Path]::GetFullPath('$(NuGetOutputPath)'))</NuGetOutputPath>
+    <NuSpecOutputPath>$(SolutionDir)..\Binaries\NuSpec\</NuSpecOutputPath>
+    <NuSpecOutputPath>$([System.IO.Path]::GetFullPath('$(NuSpecOutputPath)'))</NuSpecOutputPath>
+    <ToolsDir>$(SolutionDir)..\Tools\</ToolsDir>
+    <ToolsDir>$([System.IO.Path]::GetFullPath('$(ToolsDir)'))</ToolsDir>
+    <NuGetTool>$(ToolsDir)NuGet.exe</NuGetTool>
+    <NuGetPackTool>$(ToolsDir)NuGetPack.exe</NuGetPackTool>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' "/>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' "/>
+
+
+</Project>

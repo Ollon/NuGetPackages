@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="15.0">
+
+  <PropertyGroup>
+    <DiagnosticsProjectGuid>{880DB5EC-8BF3-485B-93DB-015B9903CA87}</DiagnosticsProjectGuid>
+    <ImmutableProjectGuid>{36063AAE-CE26-4F17-9059-453ABF79993B}</ImmutableProjectGuid>
+    <MetadataProjectGuid>{AF60C3B2-2CC6-470B-A008-6CAFDCF2C402}</MetadataProjectGuid>
+    <CodeAnalysisProjectGuid>{D1A0D7D3-C5F1-4F71-A363-BE82EDE9E0A7}</CodeAnalysisProjectGuid>
+    <CompositionProjectGuid>{8C691519-A588-4EA1-B47F-FE08793F7475}</CompositionProjectGuid>
+    <RoslynProjectGuid>{6461EEB5-237D-4E8B-B879-9A71608A24BA}</RoslynProjectGuid>
+    <VisualStudioProjectGuid>{FA5A6238-FCBC-407D-A48C-528220D2504A}</VisualStudioProjectGuid>
+    <VisualStudioEditorProjectGuid>{4B792BF9-13C1-4871-986D-1EFF8C5ADCF8}</VisualStudioEditorProjectGuid>
+    <VisualStudioTextProjectGuid>{7B24624F-28FF-4894-89CB-0C3947FC2409}</VisualStudioTextProjectGuid>
+    <PowerShellProjectGuid>{1097BEDB-0470-40E0-AC35-A8EE917A1D46}</PowerShellProjectGuid>
+    <JsonProjectGuid>{E6293F51-0EE7-4059-BCA6-0A4166C50DD5}</JsonProjectGuid>
+    <DTEProjectGuid>{8901A5C8-98B1-45B3-94C3-011711FE0F0C}</DTEProjectGuid>
+    <NuGetProjectGuid>{1C64D25B-2E34-4B50-B56D-FD0E4D8F7285}</NuGetProjectGuid>
+    <VisualStudioShellProjectGuid>{D5728D93-3AE4-4CB9-9B12-1418F653FDF9}</VisualStudioShellProjectGuid>
+  </PropertyGroup>
+  
+  
+  <PropertyGroup>
+    <IsPortable Condition="'$(IsPortable)'==''">true</IsPortable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(IsPortable)' == 'true'">
+    <TargetFrameworkIdentifier>.NETPortable</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(IsPortable)' != 'true'">
+    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+  </PropertyGroup>
+
+
+
+  <PropertyGroup>
+    <DeployTemplatesLocal>false</DeployTemplatesLocal>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)'==''">15.0</VisualStudioVersion>
+    <!-- Disable AppX packaging for the Roslyn source. Not setting this to false has the side effect
+         that any builds of portable projects end up in a sub folder of $(OutDir). Search for this flag in
+         Microsoft.Common.CurrentVersion.targets to see how it is consumed -->
+    <WindowsAppContainer>false</WindowsAppContainer>
+  </PropertyGroup>
+
+  <Choose>
+
+    <When Condition="'$(InternalProjectType)' == 'CodeAnalysis'">
+      <PropertyGroup>
+        <OutputType>Library</OutputType>
+        <OutDir>$(SolutionDir)..\Binaries\$(Configuration)\</OutDir>
+      </PropertyGroup>
+    </When>
+
+    <When Condition="'$(InternalProjectType)' == 'PortableLibrary'">
+      <PropertyGroup>
+        <OutputType>Library</OutputType>
+        <OutDir>$(SolutionDir)..\Binaries\$(Configuration)\</OutDir>
+      </PropertyGroup>
+    </When>
+
+    <When Condition="'$(InternalProjectType)' == 'Console'">
+      <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <OutDir>$(SolutionDir)..\Binaries\$(Configuration)\Exes\</OutDir>
+      </PropertyGroup>
+    </When>
+
+    <When Condition="'$(InternalProjectType)' == 'BuildDebugger'">
+      <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <OutDir>$(SolutionDir)..\Build\Logging\</OutDir>
+      </PropertyGroup>
+    </When>
+
+    <When Condition="'$(InternalProjectType)' == 'Library'">
+      <PropertyGroup>
+        <OutputType>Library</OutputType>
+        <OutDir>$(SolutionDir)..\Binaries\$(Configuration)\</OutDir>
+      </PropertyGroup>
+    </When>
+
+    <When Condition="'$(InternalProjectType)' == 'Dependency'">
+      <PropertyGroup>
+        <OutputType>Library</OutputType>
+        <OutDir>$(SolutionDir)..\Binaries\$(Configuration)\Ignore\</OutDir>
+      </PropertyGroup>
+    </When>
+
+    <When Condition="'$(InternalProjectType)' == 'PowerShell'">
+      <PropertyGroup>
+        <OutputType>Library</OutputType>
+        <OutDir>$(SolutionDir)..\Binaries\$(Configuration)\Modules\</OutDir>
+      </PropertyGroup>
+    </When>
+
+    <When Condition="'$(InternalProjectType)' == 'ExtensibilityTemplates'">
+      <PropertyGroup>
+        <OutputType>Library</OutputType>
+        <ProducesVsix>false</ProducesVsix>
+        <OutDir>$(SolutionDir)..\Binaries\$(Configuration)\Templates\</OutDir>
+      </PropertyGroup>
+    </When>
+
+    <When Condition="'$(InternalProjectType)' == 'Vsix'">
+      <PropertyGroup>
+        <OutputType>Library</OutputType>
+        <OutDir>$(SolutionDir)..\Binaries\$(Configuration)\Vsix\$(MSBuildProjectName)\</OutDir>
+      </PropertyGroup>
+    </When>
+
+    <When Condition="'$(InternalProjectType)' == 'VSPackage'">
+      <PropertyGroup>
+        <OutputType>Library</OutputType>
+        <OutDir>$(SolutionDir)..\Binaries\$(Configuration)\Vsix\$(MSBuildProjectName)\</OutDir>
+      </PropertyGroup>
+    </When>
+
+  </Choose>
+
+  <PropertyGroup>
+    <!--<OutDir>$([System.IO.Path]::GetFullPath('$(OutDir)'))</OutDir>-->
+    <OutputPath>$(OutDir)</OutputPath>
+    <ObjDir>$(SolutionDir)..\Binaries\Obj\$(MSBuildProjectName)\</ObjDir>
+    <!--<ObjDir>$([System.IO.Path]::GetFullPath('$(ObjDir)'))</ObjDir>-->
+    <IntermediateOutputPath>$(ObjDir)</IntermediateOutputPath>
+  </PropertyGroup>
+
+
+  <PropertyGroup>
+    <VisualStudioReferenceMajorVersion Condition="'$(VisualStudioReferenceMajorVersion)' == ''">$(VisualStudioVersion.Substring(0, $(VisualStudioVersion.IndexOf('.'))))</VisualStudioReferenceMajorVersion>
+    <VisualStudioReferenceAssemblyVersion Condition="'$(VisualStudioReferenceAssemblyVersion)' == ''">$(VisualStudioReferenceMajorVersion).0.0.0</VisualStudioReferenceAssemblyVersion>
+    <VisualStudioCodename>Dev$(VisualStudioReferenceMajorVersion)</VisualStudioCodename>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <FileAlignment>512</FileAlignment>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <AllowUnsafeCode>true</AllowUnsafeCode>
+    <CopyVSReferencesToOutput>True</CopyVSReferencesToOutput>
+    <DebugType Condition="'$(OS)' == 'Windows_NT'">full</DebugType>
+    <NoWarn>1591</NoWarn>
+    <GenerateSerializationAssemblies>off</GenerateSerializationAssemblies>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+
+  <Choose>
+    <When Condition="'$(SignAssembly)' == 'true'">
+      <!-- The user specified a build version number. In that case, we'll use their version number
+          for the file version, and force the assembly version to $(RoslynSemanticVersion).0.  That way
+          day-to-day upgrades don't break assembly references to other installed apps. -->
+      <PropertyGroup>
+        <BuildVersion>1.0.5.14521</BuildVersion>
+        <AssemblyVersion>1.0.5.14521</AssemblyVersion>
+        <VsixVersion>1.0.5.14521</VsixVersion>
+      </PropertyGroup>
+    </When>
+
+    <Otherwise>
+      <!-- No build version was supplied.  We'll use a special version, higher than anything
+          installed, so that the assembly identity is different.  This will allows us to
+          have a build with an actual number installed, but then build and F5 a build with
+          this number.  -->
+      <PropertyGroup>
+        <Version>42.42.42.4242</Version>
+        <FileVersion>42.42.42.42424</FileVersion>
+        <VsixVersion>42.42.42.42424</VsixVersion>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
+
+
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+
+  
+
+</Project>

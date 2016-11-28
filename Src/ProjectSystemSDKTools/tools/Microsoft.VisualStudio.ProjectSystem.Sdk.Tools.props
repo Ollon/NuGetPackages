@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <ItemGroup>
+    <!-- CPS style item type support -->
+    <PropertyPageSchema Include="$(MSBuildThisFileDirectory)XamlPropertyRule.ContentType.xaml"/>
+    <PropertyPageSchema Include="$(MSBuildThisFileDirectory)XamlPropertyRule.xaml">
+      <Context>File;BrowseObject</Context>
+    </PropertyPageSchema>
+
+    <!-- C# project system style item type support-->
+    <AvailableItemName Include="XamlPropertyRule" />
+    <AvailableItemName Include="XamlPropertyRuleNoCodeBehind" />
+    <AvailableItemName Include="XamlPropertyRuleProjectItemsSchema" />
+    <AvailableItemName Include="BuildSystemFile" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <AvailibleFileItemNames>
+      $(AvailibleFileItemName);
+      XamlPropertyRule;
+      XamlPropertyRuleNoCodeBehind;
+      XamlPropertyRuleProjectItemsSchema;
+      BuildSystemFile;
+    </AvailibleFileItemNames>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PrepareResourceNamesDependsOn>
+      GenerateRuleSourceFromXaml;
+      $(PrepareResourceNamesDependsOn)
+    </PrepareResourceNamesDependsOn>
+    <CleanDependsOn>GenerateRulePrep;$(CleanDependsOn)</CleanDependsOn>
+  </PropertyGroup>
+
+  <ItemDefinitionGroup>
+    <XamlPropertyRule>
+      <Namespace>$(RootNamespace)</Namespace>
+      <Generator>MSBuild:GenerateRuleSourceFromXaml</Generator>
+      <CreateFallbackRule>true</CreateFallbackRule>
+      <OutputPath>$(IntermediateOutputPath)</OutputPath>
+      <DataAccess>IRule</DataAccess>
+      <RuleInjection>ProjectLevel</RuleInjection>
+      <RuleInjectionCatalog>Project</RuleInjectionCatalog>
+      <RuleInjectionClassName>$(RuleInjectionClassName)</RuleInjectionClassName>
+    </XamlPropertyRule>
+  </ItemDefinitionGroup>
+
+</Project>

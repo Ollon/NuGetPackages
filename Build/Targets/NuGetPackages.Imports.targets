@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <Import Project="NuGetPackages.AssemblyInfo.targets"/>
+  
+  <PropertyGroup>
+    <PackagePath>$(OutputPath)$(MSBuildProjectName).$(NuGetVersion).nupkg</PackagePath>
+    <PublishPackagesCommandLine>&quot;$(NuGetTool)&quot; push &quot;$(PackagePath)&quot; -Verbosity $(Verbosity)  -src $(FeedUrl) -ApiKey $(ApiKey) -NonInteractive</PublishPackagesCommandLine>
+  </PropertyGroup>
+  
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
+  <PropertyGroup>
+    <PostBuildEvent>&quot;$(NuGetPackTool)&quot; &quot;$(ProjectPath)&quot; &quot;$(TargetPath)&quot; $(ConfigurationName)</PostBuildEvent>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <NuPkgFile Include="$(OutputPath)**\*.nupkg"/>
+    <NuSpecFile Include="$(OutputPath)**\*.nuspec"/>
+  </ItemGroup>
+  
+  <Target Name="AfterBuild">
+
+    <Message Importance="high" Text="NuPkgFile -> @(NuPkgFile)"/>
+    <MakeDir Condition="!Exists('$(NuGetOutputPath)')" Directories="$(NuGetOutputPath)" />
+    <Message Importance="high" Text="Copying NuGet (*.nupkg) files to '$(NuGetOutputPath)'"/>
+    <Copy SourceFiles="@(NuPkgFile)" DestinationFolder="$(NuGetOutputPath)" OverwriteReadOnlyFiles="true"/>
+    <Message Importance="high" Text="NuSpecFile -> @(NuSpecFile)"/>
+    <MakeDir Condition="!Exists('$(NuSpecOutputPath)')" Directories="$(NuSpecOutputPath)" />
+    <Message Importance="high" Text="Copying NuSpec (*.nuspec) files to '$(NuSpecOutputPath)'"/>
+    <Copy SourceFiles="@(NuSpecFile)" DestinationFolder="$(NuSpecOutputPath)" OverwriteReadOnlyFiles="true"/>
+  </Target>
+
+  <Target Name="PublishNuGetPackages" Condition="'$(PublishPackages)'=='true'" AfterTargets="AfterBuild">
+    <Message Importance="high" Text="About to run command: $(PublishPackagesCommandLine)"/>
+    <Exec Command="$(PublishPackagesCommandLine)" />
+  </Target>
+  
+</Project>

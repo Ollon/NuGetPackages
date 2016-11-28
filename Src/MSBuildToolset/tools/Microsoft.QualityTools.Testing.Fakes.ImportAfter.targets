@@ -1,0 +1,7 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="$(FakesImported) != 'true'">
+    <FakesBinPath Condition="$(FakesBinPath) == ''">$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Fakes</FakesBinPath>
+    <FakesTargets>$(FakesBinPath)\Microsoft.QualityTools.Testing.Fakes.targets</FakesTargets>
+  </PropertyGroup>
+  <Import Condition="$(FakesImported) != 'true' and Exists('$(FakesTargets)')" Project="$(FakesTargets)" />
+</Project>

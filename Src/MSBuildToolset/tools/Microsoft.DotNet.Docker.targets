@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+***********************************************************************************************
+Microsoft.DotNet.Docker.targets
+
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+
+Copyright (C) Microsoft Corporation. All rights reserved.
+***********************************************************************************************
+-->
+
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <DockerBuildTasksAssembly>$(MSBuildThisFileDirectory)\Microsoft.DotNet.Docker.BuildTasks.dll</DockerBuildTasksAssembly>
+  </PropertyGroup>
+
+  <UsingTask TaskName="CleanWorkspace" AssemblyFile="$(DockerBuildTasksAssembly)" />
+  <UsingTask TaskName="ComposeBuild" AssemblyFile="$(DockerBuildTasksAssembly)" />
+  <UsingTask TaskName="PrepareForCompile" AssemblyFile="$(DockerBuildTasksAssembly)" />
+  <UsingTask TaskName="PrepareForLaunch" AssemblyFile="$(DockerBuildTasksAssembly)" />
+
+  <PropertyGroup>
+    <DockerIntermediateOutputPath>$(MSBuildProjectDirectory)\obj\Docker</DockerIntermediateOutputPath>
+    <DockerPublishDirectory>$(DockerIntermediateOutputPath)\publish</DockerPublishDirectory>
+    <DockerPublishSemaphoreFile>$(DockerIntermediateOutputPath)\publish.sem</DockerPublishSemaphoreFile>
+    <DockerSuppressSemaphoreFile>$(DockerIntermediateOutputPath)\suppress.sem</DockerSuppressSemaphoreFile>
+  </PropertyGroup>
+
+  <PropertyGroup>
+
+    <CompileDependsOn>
+      DockerSetDevelopmentMode;
+      DockerPrepareForCompile;
+      $(CompileDependsOn);
+    </CompileDependsOn>
+
+    <BuildDependsOn>
+      DockerSetDevelopmentMode;
+      $(BuildDependsOn);
+    </BuildDependsOn>
+
+    <CleanDependsOn>
+      DockerSetDevelopmentMode;
+      DockerClean;
+      $(CleanDependsOn);
+    </CleanDependsOn>
+
+  </PropertyGroup>
+
+  <Target Name="DockerSetDevelopmentMode" Condition=" '$(SuppressDockerTargets)' != 'True' And !Exists('$(DockerSuppressSemaphoreFile)') ">
+    <PropertyGroup Condition=" '$(DockerDevelopmentMode)' == '' And '$(ActiveDebugProfile)' == 'Docker' ">
+      <DockerDevelopmentMode Condition=" '$(Configuration)' == 'Debug' ">Fast</DockerDevelopmentMode>
+      <DockerDevelopmentMode Condition=" '$(DockerDevelopmentMode)' == '' ">Regular</DockerDevelopmentMode>
+    </PropertyGroup>
+  </Target>
+
+  <Target Name="DockerPrepareForCompile" Condition=" '$(SuppressDockerTargets)' != 'True' And !Exists('$(DockerSuppressSemaphoreFile)') And '$(DockerDevelopmentMode)' != '' ">
+    <PrepareForCompile WorkspaceDirectory="$(MSBuildProjectDirectory)" WorkspaceName="$(MSBuildProjectName)" DockerDevelopmentMode="$(DockerDevelopmentMode)" />
+  </Target>
+
+  <Target Name="DockerClean" Condition=" '$(SuppressDockerTargets)' != 'True' And !Exists('$(DockerSuppressSemaphoreFile)') And '$(DockerDevelopmentMode)' != '' ">
+    <PropertyGroup>
+      <DockerComposeBuildNoCache>True</DockerComposeBuildNoCache>
+    </PropertyGroup>
+    <CleanWorkspace WorkspaceDirectory="$(MSBuildProjectDirectory)" WorkspaceName="$(MSBuildProjectName)" DockerDevelopmentMode="$(DockerDevelopmentMode)" />
+  </Target>
+
+  <Target Name="DockerRegularBuild" AfterTargets="Build" Condition=" '$(SuppressDockerTargets)' != 'True' And !Exists('$(DockerSuppressSemaphoreFile)') And '$(DockerDevelopmentMode)' == 'Regular' ">
+    <PropertyGroup>
+      <DockerComposeBuildNoCache Condition=" 'DockerComposeBuildNoCache' == '' ">False</DockerComposeBuildNoCache>
+    </PropertyGroup>
+    <CallTarget Targets="DockerInvokePublishCore" />
+    <ComposeBuild WorkspaceDirectory="$(MSBuildProjectDirectory)" WorkspaceName="$(MSBuildProjectName)" DockerDevelopmentMode="$(DockerDevelopmentMode)" NoCache="$(DockerComposeBuildNoCache)" />
+    <PrepareForLaunch WorkspaceDirectory="$(MSBuildProjectDirectory)" WorkspaceName="$(MSBuildProjectName)" DockerDevelopmentMode="$(DockerDevelopmentMode)" />
+  </Target>
+
+  <Target Name="DockerFastBuild" AfterTargets="Build" Condition=" '$(SuppressDockerTargets)' != 'True' And !Exists('$(DockerSuppressSemaphoreFile)') And '$(DockerDevelopmentMode)' == 'Fast' ">
+    <PrepareForLaunch WorkspaceDirectory="$(MSBuildProjectDirectory)" WorkspaceName="$(MSBuildProjectName)" DockerDevelopmentMode="$(DockerDevelopmentMode)" />
+  </Target>
+
+  <Target Name="DockerInvokePublish" AfterTargets="Build" Condition=" '$(SuppressDockerTargets)' != 'True' And Exists('$(DockerPublishSemaphoreFile)') ">
+    <CallTarget Targets="DockerInvokePublishCore" />
+  </Target>
+
+  <Target Name="DockerInvokePublishCore">
+    <PropertyGroup>
+      <!-- Sets Build as the default target -->
+      <DockerInvokePublishTarget>Build</DockerInvokePublishTarget>
+      <!-- Sets Publish as the target when it is a .NET Core app -->
+      <DockerInvokePublishTarget Condition=" '%(ProjectCapability.Identity)' == 'CrossPlatformExecutable' ">Publish</DockerInvokePublishTarget>
+      <!-- Sets Build as the target when it is an ASP.NET Core app -->
+      <DockerInvokePublishTarget Condition=" '%(ProjectCapability.Identity)' == 'AspNetCore' ">Build</DockerInvokePublishTarget>
+    </PropertyGroup>
+    <MSBuild Projects="$(MSBuildProjectFullPath)"
+             Targets="$(DockerInvokePublishTarget)"
+             Properties="SuppressDockerTargets=True;
+                         Configuration=$(Configuration);Platform=$(Platform);
+                         BuildingInsideVisualStudio=False;WebPublishMethod=FileSystem;DeployTarget=WebPublish;DeployOnBuild=True;PublishUrl=$(DockerPublishDirectory);PublishDir=$(DockerPublishDirectory)" />
+  </Target>
+
+  <Target Name="DockerComposeBuild">
+    <PropertyGroup>
+      <DockerComposeBuildSource Condition=" 'DockerComposeBuildSource' == '' ">bin/Release/PublishOutput</DockerComposeBuildSource>
+      <DockerComposeBuildNoCache Condition=" 'DockerComposeBuildNoCache' == '' ">True</DockerComposeBuildNoCache>
+    </PropertyGroup>
+    <ComposeBuild WorkspaceDirectory="$(MSBuildProjectDirectory)" WorkspaceName="$(MSBuildProjectName)" DockerDevelopmentMode="Regular" BuildSource="$(DockerComposeBuildSource)" NoCache="$(DockerComposeBuildNoCache)" />
+  </Target>
+
+</Project>
