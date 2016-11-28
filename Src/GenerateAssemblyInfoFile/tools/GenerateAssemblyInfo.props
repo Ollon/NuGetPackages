@@ -40,7 +40,7 @@
     <GenerateAssemblyConfigurationAttribute Condition="'$(GenerateAssemblyConfigurationAttribute)'==''">true</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyInformationalVersionAttribute Condition="'$(GenerateAssemblyInformationalVersionAttribute)'==''">true</GenerateAssemblyInformationalVersionAttribute>
     <GenerateAssemblyFileVersionAttribute Condition="'$(GenerateAssemblyFileVersionAttribute)'==''">true</GenerateAssemblyFileVersionAttribute>
-    <GenerateAssemblyCultureAttribute Condition="'$(GenerateAssemblyCultureAttribute)'==''">true</GenerateAssemblyCultureAttribute>
+    <GenerateAssemblyCultureAttribute Condition="'$(GenerateAssemblyCultureAttribute)'=='' and '$(OutputType)' == 'Library'">true</GenerateAssemblyCultureAttribute>
     <GenerateAssemblyVersionAttribute Condition="'$(GenerateAssemblyVersionAttribute)'==''">true</GenerateAssemblyVersionAttribute>
     <GenerateAssemblyKeyFileAttribute Condition="'$(GenerateAssemblyKeyFileAttribute)'==''">false</GenerateAssemblyKeyFileAttribute>
     <GenerateAssemblyDelaySignAttribute Condition="'$(GenerateAssemblyDelaySignAttribute)'==''">false</GenerateAssemblyDelaySignAttribute>
