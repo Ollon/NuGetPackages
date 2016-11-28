@@ -16,7 +16,7 @@
     <Title Condition="'$(Title)' == ''">$(AssemblyName)</Title>
     <Configuration Condition="'$(Configuration)' == ''">Debug</Configuration>
 
-    <Culture Condition="'$(Culture)' == ''">en-US</Culture>
+    <Culture Condition="'$(Culture)' == '' and '$(OutputType)'=='Library'">en-US</Culture>
 
     <!--
     <Trademark Condition="'$(Trademark)' == ''"></Trademark>
