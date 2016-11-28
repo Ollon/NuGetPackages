@@ -1,5 +1,5 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-  <Import Project="$(ToolsDirectory)GenerateAssemblyInfo.targets"/>
+  <Import Project="$(MSBuildThisFileDirectory)..\tools\GenerateAssemblyInfo.targets"/>
   
 </Project>

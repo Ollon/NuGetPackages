@@ -1,7 +1,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
 
-  <Import Project="$(ToolsDirectory)Microsoft.VisualStudio.ProjectSystem.Sdk.Tools.targets" />
+  <Import Project="$(MSBuildThisFileDirectory)..\tools\Microsoft.VisualStudio.ProjectSystem.Sdk.Tools.targets" />
   
   
 </Project>
