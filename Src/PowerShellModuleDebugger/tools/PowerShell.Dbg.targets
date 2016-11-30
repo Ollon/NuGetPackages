@@ -8,7 +8,7 @@
     <ItemGroup>
       <PowerShellModuleDataLine Include="@{" />
       <PowerShellModuleDataLine Include="    RootModule = '$(AssemblyName).dll'" />
-      <PowerShellModuleDataLine Include="    ModuleVersion = '$(AssemblyVersion)'" />
+      <PowerShellModuleDataLine Include="    ModuleVersion = '$(ModuleVersion)'" />
       <PowerShellModuleDataLine Include="    GUID = '$(ProjectGuid)'" />
       <PowerShellModuleDataLine Include="    Author = 'Brad R. Marshall'" />
       <PowerShellModuleDataLine Include="    CompanyName = 'Ollon, LLC'" />

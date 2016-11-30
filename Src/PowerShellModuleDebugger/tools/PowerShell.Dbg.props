@@ -2,17 +2,25 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
-    <StartAction>Program</StartAction>
-    <StartProgram>$(SystemRoot)\System32\WindowsPowerShell\v1.0\PowerShell.exe</StartProgram>
-    <StartArguments>-NoExit -Command Import-Module .\$(MSBuildProjectName) -Verbose</StartArguments>
-    <StartWorkingDirectory>$(OutputPath)</StartWorkingDirectory>
-  </PropertyGroup>
-
-  <PropertyGroup>
     <RootModule>$(OutputPath)$(AssemblyName).dll</RootModule>
     <ModuleFolder>$(OutputPath)$(AssemblyName)\</ModuleFolder>
     <DataFile>$(ModuleFolder)$(AssemblyName).psd1</DataFile>
-    <AssemblyVersion Condition="'$(AssemblyVersion)'==''">1.0.0.0</AssemblyVersion>
+    <ModuleVersion Condition="'$(AssemblyVersion)'==''">1.0.0.0</ModuleVersion>
+    <StartAction>Program</StartAction>
+    <StartProgram>$(SystemRoot)\System32\WindowsPowerShell\v1.0\PowerShell.exe</StartProgram>
   </PropertyGroup>
+  
+  <Choose>
+    <When Condition="Exists('$(OutputPath)Start-Debug.ps1')">
+      <PropertyGroup>
+        <StartArguments>-NoExit -ExecutionPolicy ByPass -File Start-Debug.ps1</StartArguments>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup>
+        <StartArguments>-NoExit -Command Import-Module .\$(MSBuildProjectName) -Verbose</StartArguments>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
 
 </Project>
