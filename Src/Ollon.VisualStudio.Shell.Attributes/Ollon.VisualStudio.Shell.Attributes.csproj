@@ -11,7 +11,14 @@
   <PropertyGroup>
     <RootNamespace>Ollon.VisualStudio.Shell</RootNamespace>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
+    <None Include="Key.snk" />
     <None Include="Ollon.VisualStudio.Shell.Attributes.nuspec" />
     <None Include="packages.config" />
     <None Include="NuGetPack.config" />
@@ -40,7 +47,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="lib\Ollon.VisualStudio.Shell.Attributes.dll" />
+    <Content Include="lib\net462\Ollon.VisualStudio.Shell.Attributes.dll" />
   </ItemGroup>
   <Import Project="..\..\Build\Targets\NuGetPackages.Imports.targets" Condition="Exists('..\..\Build\Targets\NuGetPackages.Imports.targets')" />
 </Project>

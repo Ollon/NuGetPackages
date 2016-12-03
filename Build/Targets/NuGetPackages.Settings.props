@@ -5,7 +5,7 @@
 
   <PropertyGroup>
 
-    <PublishPackages>true</PublishPackages>
+    <PublishPackages>false</PublishPackages>
 
     <PackageVersion>15.1.1</PackageVersion>
     <NuGetVersion>$(PackageVersion)-RC</NuGetVersion>
