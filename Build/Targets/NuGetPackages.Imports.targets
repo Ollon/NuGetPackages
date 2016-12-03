@@ -11,7 +11,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 
   <PropertyGroup>
-    <PostBuildEvent>&quot;$(NuGetPackTool)&quot; &quot;$(ProjectPath)&quot; &quot;$(TargetPath)&quot; $(ConfigurationName)</PostBuildEvent>
+    <PostBuildEvent>&quot;$(NuGetPackTool)&quot; &quot;$(ProjectPath)&quot; &quot;$(TargetPath)&quot; $(Configuration)</PostBuildEvent>
   </PropertyGroup>
 
   <ItemGroup>

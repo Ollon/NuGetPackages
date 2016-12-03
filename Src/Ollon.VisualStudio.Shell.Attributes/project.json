@@ -1,0 +1,26 @@
+﻿{
+  "dependencies": {
+    "Microsoft.VisualStudio.Shell.15.0": "15.0.25901-RC",
+    "Microsoft.VisualStudio.Shell.Framework": "15.0.25901-RC",
+    "Microsoft.VisualStudio.Shell.Interop": "7.10.6071",
+    "Microsoft.VisualStudio.Shell.Interop.10.0": "10.0.30319",
+    "Microsoft.VisualStudio.Shell.Interop.11.0": "11.0.61030",
+    "Microsoft.VisualStudio.Shell.Interop.12.0": "12.0.30110",
+    "Microsoft.VisualStudio.Shell.Interop.12.1.DesignTime": "12.1.30328",
+    "Microsoft.VisualStudio.Shell.Interop.14.0.DesignTime": "14.3.25407",
+    "Microsoft.VisualStudio.Shell.Interop.15.0.DesignTime": "15.0.25824-RC",
+    "Microsoft.VisualStudio.Shell.Interop.8.0": "8.0.50727",
+    "Microsoft.VisualStudio.Shell.Interop.9.0": "9.0.30729",
+    "Microsoft.VisualStudio.Shell.Immutable.10.0": "15.0.25413-Preview5",
+    "Microsoft.VisualStudio.Shell.Immutable.11.0": "15.0.25413-Preview5",
+    "Microsoft.VisualStudio.Shell.Immutable.12.0": "15.0.25413-Preview5",
+    "Microsoft.VisualStudio.Shell.Immutable.14.0": "15.0.25403-Preview5",
+    "Microsoft.VisualStudio.Shell.Immutable.15.0": "15.0.25123-Dev15Preview"
+  },
+  "frameworks": {
+    "net462": {}
+  },
+  "runtimes": {
+    "win": {}
+  }
+}

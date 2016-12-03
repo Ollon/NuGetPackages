@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>Ollon.VisualStudio.Shell.Attributes</id>
+    <version>15.1.1-RC</version>
+    <title>Ollon.VisualStudio.Shell.Attributes</title>
+    <authors>bmarshall</authors>
+    <owners>bmarshall</owners>
+    <licenseUrl>https://raw.githubusercontent.com/Ollon/NuGetPackages/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/Ollon/NuGetPackages</projectUrl>
+    <iconUrl>http://aka.ms/VsExtensibilityIcon</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>Amalgamates registration attributes for use in developing Visual Studio Packages.</description>
+    <releaseNotes>Amalgamates registration attributes for use in developing Visual Studio Packages.</releaseNotes>
+    <copyright>Copyright 2016 Ollon, LLC. All Rights Reserved.</copyright>
+    <tags>VSPackage, Attribute</tags>
+    <dependencies>
+      <group targetFramework=".NETFramework4.6.2">
+        <dependency id="Microsoft.VisualStudio.Shell.15.0" version="15.0.25901-RC" />
+        <dependency id="Microsoft.VisualStudio.Shell.Framework" version="15.0.25901-RC" />
+        <dependency id="Microsoft.VisualStudio.Shell.Interop" version="7.10.6071" />
+        <dependency id="Microsoft.VisualStudio.Shell.Interop.10.0" version="10.0.30319" />
+        <dependency id="Microsoft.VisualStudio.Shell.Interop.11.0" version="11.0.61030" />
+        <dependency id="Microsoft.VisualStudio.Shell.Interop.12.0" version="12.0.30110" />
+        <dependency id="Microsoft.VisualStudio.Shell.Interop.12.1.DesignTime" version="12.1.30328" />
+        <dependency id="Microsoft.VisualStudio.Shell.Interop.14.0.DesignTime" version="14.3.25407" />
+        <dependency id="Microsoft.VisualStudio.Shell.Interop.15.0.DesignTime" version="15.0.25824-RC" />
+        <dependency id="Microsoft.VisualStudio.Shell.Interop.8.0" version="8.0.50727" />
+        <dependency id="Microsoft.VisualStudio.Shell.Interop.9.0" version="9.0.30729" />
+        <dependency id="Microsoft.VisualStudio.Shell.Immutable.10.0" version="15.0.25413-Preview5" />
+        <dependency id="Microsoft.VisualStudio.Shell.Immutable.11.0" version="15.0.25413-Preview5" />
+        <dependency id="Microsoft.VisualStudio.Shell.Immutable.12.0" version="15.0.25413-Preview5" />
+        <dependency id="Microsoft.VisualStudio.Shell.Immutable.14.0" version="15.0.25403-Preview5" />
+        <dependency id="Microsoft.VisualStudio.Shell.Immutable.15.0" version="15.0.25123-Dev15Preview" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="lib\**\*" target="lib\" />
+  </files>
+</package>
